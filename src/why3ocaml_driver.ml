@@ -39,6 +39,8 @@ let () = List.iter (fun (x, y) -> Hstr.add driver x y)
       ":=", "infix :=";
       "|>", "infix |>";
       "<>", "infix ~="; ]
+      "mixfix ([<-])", "mixfix ([<-])";
+    ]
 
 let query_syntax str =
   Hstr.find_opt driver str
