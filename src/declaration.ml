@@ -467,8 +467,6 @@ let s_structure, s_signature =
     let mod_type_name = function (* FIXME: make it more robust *)
       | Uast.Mod_ident s | Mod_with ({mdesc = Mod_ident s; _}, _) -> Some s.txt
       | _ -> None in
-    let scope_loc = T.location spmb_loc in
-    let scope_id  = T.(mk_id ~id_loc:(location loc) mod_bind_name) in
     let rec s_module_expr Uast.{spmod_desc; spmod_loc; _} =
       let decl_loc = T.location spmod_loc in
       match spmod_desc with
@@ -496,10 +494,13 @@ let s_structure, s_signature =
           let mod_type, subst = s_module_type info mod_type in
           let info_ref = mk_info_refinement mod_type_name mod_type subst path in
           add_info_refinement info mod_bind_name info_ref;
-          [O.mk_omodule scope_loc scope_id (s_module_expr mod_expr)]
+          (* [O.mk_omodule scope_loc scope_id (s_module_expr mod_expr)] *)
+          s_module_expr mod_expr
       | Smod_unpack _ -> assert false (* TODO *)
       | Smod_extension _ -> assert false (* TODO *) in
     (* s_module_expr spmb_expr *)
+    let scope_loc = T.location spmb_loc in
+    let scope_id  = T.(mk_id ~id_loc:(location loc) mod_bind_name) in
     [O.mk_omodule scope_loc scope_id (s_module_expr spmb_expr)]
 
   and s_mod_apply _info lhs_expr _rhs_expr =
