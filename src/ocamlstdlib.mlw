@@ -200,9 +200,8 @@ module Stdlib
       writes  { q }
       ensures { q.view = snoc (old q).view x }
 
-    val copy (q : t 'a) : t 'a 
+    val copy (q : t 'a) : t 'a
       ensures { result.view == q.view }
-    
 
   end
 
@@ -491,10 +490,10 @@ module Queue
   val add (x: 'a) (q: t 'a) : unit
     writes  { q }
     ensures { q.view = snoc (old q).view x }
-    
-  val copy (q : t 'a) : t 'a 
+
+  val copy (q : t 'a) : t 'a
     ensures { result.view == q.view }
-    
+
 end
 
 module Seq
