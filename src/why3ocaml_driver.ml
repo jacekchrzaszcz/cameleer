@@ -13,7 +13,8 @@ type syntax_map = string Hstr.t
 
 let driver: syntax_map = Hstr.create 16
 let () = List.iter (fun (x, y) -> Hstr.add driver x y)
-    [ "integer", "int";
+    [ "exists", "exists_" ;
+      "integer", "int";
       "int", "int";
       "+", "infix +";
       "*", "infix *";
