@@ -40,7 +40,7 @@ let () = List.iter (fun (x, y) -> Hstr.add driver x y)
       "!", "prefix !";
       ":=", "infix :=";
       "|>", "infix |>";
-      "<>", "infix ~="; ]
+      "<>", "infix ~=";
       "mixfix ([<-])", "mixfix ([<-])";
     ]
 
